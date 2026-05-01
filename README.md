@@ -7,7 +7,6 @@
 
 **ChainKYC** is a blockchain-based KYC (Know Your Customer) validation system designed to prevent data duplication, enhance security through immutable ledgers, and drastically reduce compliance overhead for global institutions. 
 
-Built with a stunning, highly optimized **VCR Protocol-inspired Neo-Brutalist** aesthetic.
 
 ---
 
