@@ -436,12 +436,22 @@ h1, h2, h3, h4, h5, h6 {
 
 
 /* APP Dashboard Overrides */
-.app-container { max-width: 1400px; margin: 3rem auto; padding: 0 2rem; display: flex; flex-direction: column; gap: 3rem; }
+.dashboard-wrapper {
+  min-height: 100vh;
+  padding-bottom: 5rem;
+}
+.brutal-bg {
+  background-color: var(--bg-color);
+  background-image: radial-gradient(rgba(0,0,0,0.15) 2px, transparent 2px);
+  background-size: 30px 30px;
+}
+
+.app-container { max-width: 1200px; margin: 3rem auto; padding: 0 2rem; display: flex; flex-direction: column; gap: 3rem; }
 .dashboard-header { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 3rem; background-color: var(--black); color: var(--white); border: var(--border-width) solid var(--black); box-shadow: var(--shadow); }
 .dashboard-header .logo { font-size: 2.5rem; font-family: 'Space Grotesk', sans-serif; font-weight: 800; }
 .connect-btn { background-color: var(--white); color: var(--black); border: var(--border-width) solid var(--white); padding: 0.8rem 1.5rem; font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 1rem; cursor: pointer; box-shadow: 4px 4px 0px 0px var(--primary); transition: all 0.15s ease; text-transform: uppercase; }
 .connect-btn:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0px 0px var(--primary); }
-.dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+.dashboard { max-width: 800px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 3rem; }
 .glass-panel { background-color: var(--white); border: var(--border-width) solid var(--black); padding: 2.5rem; box-shadow: var(--shadow); position: relative; }
 .glass-panel::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 12px; background-color: var(--black); border-bottom: var(--border-width) solid var(--black); }
 .glass-panel:nth-child(2)::before { background-color: var(--primary); }
