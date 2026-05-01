@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import chainKYCData from './contracts/ChainKYC.json';
+import Landing from './Landing';
 import './index.css';
 
 function App() {
+  const [showApp, setShowApp] = useState(false);
   const [account, setAccount] = useState('');
   const [contract, setContract] = useState(null);
   
@@ -98,76 +100,105 @@ function App() {
     }
   }, [account, contract]);
 
+  if (!showApp) {
+    return <Landing onLaunch={() => setShowApp(true)} />;
+  }
+
   return (
     <div className="app-container">
-      <header className="animate-fade-in">
-        <div className="logo">ChainKYC</div>
-        <button className="connect-btn" onClick={connectWallet}>
-          {account ? `${account.substring(0, 6)}...${account.substring(account.length - 4)}` : 'Connect Wallet'}
-        </button>
+      <header className="dashboard-header animate-slide-up">
+        <div className="logo">CHAIN<span>KYC</span></div>
+        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+          {account && <span className="badge bg-white">Connected</span>}
+          <button className="connect-btn animate-jiggle" onClick={connectWallet}>
+            {account ? account.substring(0, 6) + "..." + account.substring(38) : "Connect Wallet"}
+          </button>
+        </div>
       </header>
 
-      <main className="dashboard animate-fade-in delay-1">
-        {/* Customer Portal */}
-        <div className="glass-panel">
-          <h2 className="panel-title">Customer Portal</h2>
+      {account ? (
+        <main className="dashboard">
           
-          <div className="data-row">
-            <span className="data-label">Status</span>
-            {customerInfo ? (
-              <span className={`badge ${customerInfo.isVerified ? 'verified' : 'pending'}`}>
-                {customerInfo.isVerified ? 'Verified' : 'Pending Verification'}
-              </span>
-            ) : (
-              <span className="badge pending">Not Registered</span>
-            )}
-          </div>
-          
-          {customerInfo && customerInfo.isVerified && (
+          {/* Customer Panel */}
+          <section className="glass-panel brutal-box animate-slide-up delay-1">
+            <h2 className="panel-title">CUSTOMER PORTAL</h2>
+            
             <div className="data-row">
-              <span className="data-label">Verified By</span>
-              <span className="data-value" title={customerInfo.verifier}>
-                {`${customerInfo.verifier.substring(0, 8)}...`}
-              </span>
+              <span className="data-label">Status</span>
+              {customerInfo?.isVerified ? (
+                <span className="badge verified">Verified</span>
+              ) : (
+                <span className="badge pending">Pending Verification</span>
+              )}
             </div>
-          )}
 
-          <form onSubmit={registerCustomer} style={{ marginTop: '2rem' }}>
-            <div className="form-group">
-              <label>KYC Document Hash (IPFS CID)</label>
-              <input 
-                type="text" 
-                value={kycHash}
-                onChange={(e) => setKycHash(e.target.value)}
-                placeholder="Qm..."
-                required
-              />
-            </div>
-            <button type="submit" className="action-btn">Submit KYC Data</button>
-          </form>
-        </div>
+            {customerInfo?.isVerified && (
+              <div className="data-row">
+                <span className="data-label">Verified By</span>
+                <span className="data-value">{customerInfo.verifier}</span>
+              </div>
+            )}
 
-        {/* Bank / Institution Portal */}
-        <div className="glass-panel animate-fade-in delay-2">
-          <h2 className="panel-title">Institution Portal</h2>
-          
-          {isBank && <div className="badge authorized-bank">Authorized Bank</div>}
-          
-          <form onSubmit={verifyCustomer}>
-            <div className="form-group">
-              <label>Customer Address to Verify</label>
-              <input 
-                type="text" 
-                value={customerAddress}
-                onChange={(e) => setCustomerAddress(e.target.value)}
-                placeholder="0x..."
-                required
-              />
-            </div>
-            <button type="submit" className="action-btn success">Approve KYC</button>
-          </form>
+            {!customerInfo?.isVerified && (
+              <form onSubmit={registerCustomer} style={{marginTop: '2rem'}}>
+                <div className="form-group">
+                  <label>KYC Document Hash (IPFS)</label>
+                  <input 
+                    type="text" 
+                    placeholder="e.g. QmHash123..."
+                    value={kycHash}
+                    onChange={(e) => setKycHash(e.target.value)}
+                  />
+                </div>
+                <button type="submit" className="action-btn animate-jiggle">
+                  Submit KYC Data
+                </button>
+              </form>
+            )}
+          </section>
+
+          {/* Institution Panel */}
+          <section className="glass-panel brutal-box animate-slide-up delay-2">
+            <h2 className="panel-title">INSTITUTION PORTAL</h2>
+            
+            {isBank ? (
+              <>
+                <div className="badge authorized-bank">AUTHORIZED BANK</div>
+                <form onSubmit={verifyCustomer}>
+                  <div className="form-group">
+                    <label>Customer Address to Verify</label>
+                    <input 
+                      type="text" 
+                      placeholder="0x..."
+                      value={customerAddress}
+                      onChange={(e) => setCustomerAddress(e.target.value)}
+                    />
+                  </div>
+                  <button type="submit" className="action-btn success animate-jiggle">
+                    Approve KYC
+                  </button>
+                </form>
+              </>
+            ) : (
+              <div style={{ textAlign: 'center', padding: '3rem 0' }}>
+                <span className="data-label" style={{display: 'block', marginBottom: '1rem', color: 'var(--primary)', fontSize: '4rem'}}>&#9888;</span>
+                <span className="data-label">Access Denied</span>
+                <p style={{ marginTop: '1rem', fontWeight: 500, fontSize: '1.2rem' }}>
+                  Your wallet is not authorized as a verified institution on this network.
+                </p>
+              </div>
+            )}
+          </section>
+
+        </main>
+      ) : (
+        <div className="glass-panel brutal-box animate-slide-up delay-1" style={{ textAlign: 'center', padding: '6rem 2rem' }}>
+          <h2 className="panel-title" style={{marginBottom: '1rem'}}>SECURE CONNECTION REQUIRED</h2>
+          <p style={{ fontSize: '1.5rem', fontWeight: 500, maxWidth: '600px', margin: '0 auto', lineHeight: 1.6 }}>
+            Please connect your MetaMask wallet to access the Decentralized Identity Verification Network.
+          </p>
         </div>
-      </main>
+      )}
     </div>
   );
 }
