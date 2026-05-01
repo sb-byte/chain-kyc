@@ -77,7 +77,8 @@ function App() {
       setCustomerAddress('');
     } catch (error) {
       console.error(error);
-      alert("Error verifying. Are you an authorized bank?");
+      const reason = error.reason || error.message || "Unknown error";
+      alert("Error verifying: " + reason);
     }
   };
 
