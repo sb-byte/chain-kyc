@@ -6,7 +6,7 @@ function Landing({ onLaunch }) {
     <div className="landing-page">
       {/* Navigation */}
       <nav className="brutal-nav">
-        <div className="logo-text">CHAINKYC</div>
+        <div className="logo-text">CHAIN<span style={{color: 'var(--primary)'}}>KYC.</span></div>
         <button className="brutal-btn-nav" onClick={onLaunch}>
           Launch Dashboard
         </button>
@@ -16,7 +16,7 @@ function Landing({ onLaunch }) {
       <header className="vcr-hero">
         <div className="vcr-content">
           <div className="vcr-badge">SYSTEM OVERVIEW</div>
-          
+
           <h1 className="vcr-title">
             <span className="title-line">DECENTRALIZED</span>
             <span className="title-line">
@@ -25,20 +25,20 @@ function Landing({ onLaunch }) {
               </span>
             </span>
             <span className="title-line">
-              VERIFICATION 
+              VERIFICATION
               <span className="vcr-pill pill-blue">NETWORK</span>
             </span>
           </h1>
-          
+
           <p className="vcr-desc">
             A blockchain-based KYC validation system designed to prevent data duplication, enhance security through immutable ledgers, and drastically reduce compliance overhead for global institutions.
           </p>
-          
+
           <button className="vcr-btn" onClick={onLaunch}>
             ACCESS DASHBOARD
           </button>
         </div>
-        
+
         {/* Floating Abstract Shapes */}
         <div className="shape-layer">
           <div className="vcr-shape shape-1"></div>
@@ -66,9 +66,9 @@ function Landing({ onLaunch }) {
           <div className="metric-num">80%</div>
           <div className="metric-label">Reduction in Compliance Costs</div>
         </div>
-        <div className="metric-box" style={{backgroundColor: 'var(--white)'}}>
-          <div className="metric-num" style={{color: 'var(--black)'}}>&lt;5 MIN</div>
-          <div className="metric-label" style={{color: 'var(--black)'}}>Average Approval Time</div>
+        <div className="metric-box" style={{ backgroundColor: 'var(--white)' }}>
+          <div className="metric-num" style={{ color: 'var(--black)' }}>&lt;5 MIN</div>
+          <div className="metric-label" style={{ color: 'var(--black)' }}>Average Approval Time</div>
         </div>
         <div className="metric-box">
           <div className="metric-num">100%</div>
@@ -199,7 +199,7 @@ function Landing({ onLaunch }) {
 
       {/* Footer */}
       <footer className="brutal-footer">
-        <div className="footer-logo">CHAIN<span style={{color: 'var(--accent)'}}>KYC</span></div>
+        <div className="footer-logo">CHAIN<span style={{ color: 'var(--primary)' }}>KYC.</span></div>
         <button className="brutal-btn-nav" onClick={onLaunch}>ENTER DAPP &rarr;</button>
       </footer>
     </div>
