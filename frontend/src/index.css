@@ -1,0 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;600;800&display=swap');
+
+:root {
+  --bg-color: #f4f0e6;
+  --text-color: #000000;
+  --primary: #ffd600; /* Yellow */
+  --secondary: #1d4ed8; /* Blue */
+  --danger: #ef4444; /* Red */
+  --success: #10b981; /* Green */
+  --border-color: #000000;
+  --border-width: 3px;
+  --shadow-offset: 6px;
+  --shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--border-color);
+  --shadow-hover: 2px 2px 0px 0px var(--border-color);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  overflow-x: hidden;
+  /* subtle dot pattern for brutalist feel */
+  background-image: radial-gradient(#000000 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  background-color: #000;
+  color: #fff;
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: var(--shadow);
+}
+
+.logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.logo span {
+  color: var(--primary);
+}
+
+.connect-btn {
+  background-color: var(--secondary);
+  color: white;
+  border: var(--border-width) solid var(--border-color);
+  padding: 0.75rem 1.5rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 4px 4px 0px 0px #fff;
+  transition: all 0.15s ease;
+  text-transform: uppercase;
+}
+
+.connect-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px #fff;
+}
+
+.connect-btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0px 0px 0px 0px #fff;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.glass-panel {
+  background-color: #fff;
+  border: var(--border-width) solid var(--border-color);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  transition: all 0.15s ease;
+}
+
+/* Give the first panel a yellow accent, second a blue accent */
+.glass-panel:nth-child(1) {
+  background-color: #fff;
+}
+
+.glass-panel:nth-child(2) {
+  background-color: #fff;
+}
+
+.panel-title {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #000;
+  display: inline-block;
+  background-color: var(--primary);
+  padding: 0.2rem 0.8rem;
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: 4px 4px 0px 0px #000;
+}
+
+.glass-panel:nth-child(2) .panel-title {
+  background-color: #fff;
+  color: #000;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #000;
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.form-group input {
+  width: 100%;
+  background: #fff;
+  border: var(--border-width) solid var(--border-color);
+  padding: 1rem;
+  color: #000;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  background-color: #f4f0e6;
+  box-shadow: 4px 4px 0px 0px var(--primary);
+}
+
+.action-btn {
+  width: 100%;
+  background-color: var(--primary);
+  border: var(--border-width) solid var(--border-color);
+  color: #000;
+  padding: 1rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: all 0.15s ease;
+  margin-top: 1rem;
+}
+
+.action-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.action-btn:active {
+  transform: translate(6px, 6px);
+  box-shadow: 0px 0px 0px 0px var(--border-color);
+}
+
+.action-btn.success {
+  background-color: var(--secondary);
+  color: white;
+}
+
+.data-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: var(--border-width) solid var(--border-color);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+}
+
+.data-row:last-of-type {
+  border-bottom: none;
+  margin-bottom: 1rem;
+}
+
+.data-label {
+  color: #000;
+  text-transform: uppercase;
+}
+
+.data-value {
+  color: var(--secondary);
+  background-color: #fff;
+  padding: 0.1rem 0.5rem;
+  border: 2px solid #000;
+}
+
+.badge {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 2px solid var(--border-color);
+  background-color: #fff;
+  box-shadow: 2px 2px 0px 0px var(--border-color);
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.badge.verified {
+  background-color: var(--success);
+  color: #fff;
+}
+
+.badge.pending {
+  background-color: var(--danger);
+  color: #fff;
+}
+
+/* Custom class for the Authorized Bank badge */
+.badge.authorized-bank {
+  background-color: var(--primary);
+  color: #000;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+}
+
+/* Animations */
+@keyframes popIn {
+  0% { transform: scale(0.95) translateY(10px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }

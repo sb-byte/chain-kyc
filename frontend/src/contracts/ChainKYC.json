@@ -1,0 +1,454 @@
+{
+  "address": "0xae10fb61F4e321974ce1b8e7A5a24cBb1D988430",
+  "abi": [
+    {
+      "type": "constructor",
+      "stateMutability": "undefined",
+      "payable": false,
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "OwnableInvalidOwner",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "owner"
+        }
+      ]
+    },
+    {
+      "type": "error",
+      "name": "OwnableUnauthorizedAccount",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "account"
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "anonymous": false,
+      "name": "AccessGranted",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "customer",
+          "indexed": true
+        },
+        {
+          "type": "address",
+          "name": "institution",
+          "indexed": true
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "anonymous": false,
+      "name": "AccessRevoked",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "customer",
+          "indexed": true
+        },
+        {
+          "type": "address",
+          "name": "institution",
+          "indexed": true
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "anonymous": false,
+      "name": "BankAdded",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "bank",
+          "indexed": true
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "anonymous": false,
+      "name": "BankRemoved",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "bank",
+          "indexed": true
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "anonymous": false,
+      "name": "CustomerRegistered",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "customer",
+          "indexed": true
+        },
+        {
+          "type": "string",
+          "name": "dataHash",
+          "indexed": false
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "anonymous": false,
+      "name": "InstitutionAdded",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "institution",
+          "indexed": true
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "anonymous": false,
+      "name": "InstitutionRemoved",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "institution",
+          "indexed": true
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "anonymous": false,
+      "name": "KYCVerified",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "customer",
+          "indexed": true
+        },
+        {
+          "type": "address",
+          "name": "bank",
+          "indexed": true
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "anonymous": false,
+      "name": "OwnershipTransferred",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "previousOwner",
+          "indexed": true
+        },
+        {
+          "type": "address",
+          "name": "newOwner",
+          "indexed": true
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "accessList",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [
+        {
+          "type": "address",
+          "name": ""
+        },
+        {
+          "type": "address",
+          "name": ""
+        }
+      ],
+      "outputs": [
+        {
+          "type": "bool",
+          "name": ""
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "addBank",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "address",
+          "name": "_bank"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "addInstitution",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "address",
+          "name": "_institution"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "banks",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [
+        {
+          "type": "address",
+          "name": ""
+        }
+      ],
+      "outputs": [
+        {
+          "type": "bool",
+          "name": ""
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "checkVerificationStatus",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [
+        {
+          "type": "address",
+          "name": "_customer"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "bool",
+          "name": ""
+        },
+        {
+          "type": "address",
+          "name": ""
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "customers",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [
+        {
+          "type": "address",
+          "name": ""
+        }
+      ],
+      "outputs": [
+        {
+          "type": "string",
+          "name": "dataHash"
+        },
+        {
+          "type": "bool",
+          "name": "isVerified"
+        },
+        {
+          "type": "address",
+          "name": "verifier"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "getCustomerData",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [
+        {
+          "type": "address",
+          "name": "_customer"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "string",
+          "name": ""
+        },
+        {
+          "type": "bool",
+          "name": ""
+        },
+        {
+          "type": "address",
+          "name": ""
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "grantAccess",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "address",
+          "name": "_institution"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "institutions",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [
+        {
+          "type": "address",
+          "name": ""
+        }
+      ],
+      "outputs": [
+        {
+          "type": "bool",
+          "name": ""
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "owner",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "address",
+          "name": ""
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "registerCustomer",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "string",
+          "name": "_dataHash"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "removeBank",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "address",
+          "name": "_bank"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "removeInstitution",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "address",
+          "name": "_institution"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "renounceOwnership",
+      "constant": false,
+      "payable": false,
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "revokeAccess",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "address",
+          "name": "_institution"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "transferOwnership",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "address",
+          "name": "newOwner"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateCustomerData",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "string",
+          "name": "_newDataHash"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "verifyKYC",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "address",
+          "name": "_customer"
+        }
+      ],
+      "outputs": []
+    }
+  ]
+}
