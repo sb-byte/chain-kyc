@@ -62,7 +62,12 @@ function App() {
       checkMyStatus();
     } catch (error) {
       console.error(error);
-      alert("Error registering. See console for details.");
+      const reason = error.reason || error.message || "Unknown error";
+      if (reason.includes("already registered")) {
+        alert("You have already submitted your KYC data. Please wait for verification.");
+      } else {
+        alert("Error registering: " + reason);
+      }
     }
   };
 
@@ -120,76 +125,75 @@ function App() {
       {account ? (
         <main className="dashboard">
           
-          {/* Customer Panel */}
-          <section className="glass-panel brutal-box animate-slide-up delay-1">
-            <h2 className="panel-title">CUSTOMER PORTAL</h2>
-            
-            <div className="data-row">
-              <span className="data-label">Status</span>
-              {customerInfo?.isVerified ? (
-                <span className="badge verified">Verified</span>
-              ) : (
-                <span className="badge pending">Pending Verification</span>
-              )}
-            </div>
-
-            {customerInfo?.isVerified && (
-              <div className="data-row">
-                <span className="data-label">Verified By</span>
-                <span className="data-value">{customerInfo.verifier}</span>
+          {/* Customer Panel - Hidden for Banks */}
+          {!isBank && (
+            <section className="glass-panel brutal-box animate-slide-up delay-1">
+              <h2 className="panel-title">CUSTOMER PORTAL</h2>
+              
+              <div className="status-indicator">
+                <span className="data-label">Status:</span>
+                {customerInfo?.isVerified ? (
+                  <span className="badge status-verified">VERIFIED</span>
+                ) : customerInfo?.isRegistered ? (
+                  <span className="badge status-pending" style={{backgroundColor: 'var(--accent)', color: 'var(--black)'}}>PENDING VERIFICATION</span>
+                ) : (
+                  <span className="badge status-unregistered" style={{backgroundColor: 'var(--black)', color: 'var(--white)'}}>NOT REGISTERED</span>
+                )}
               </div>
-            )}
 
-            {!customerInfo?.isVerified && (
-              <form onSubmit={registerCustomer} style={{marginTop: '2rem'}}>
-                <div className="form-group">
-                  <label>KYC Document Hash (IPFS)</label>
-                  <input 
-                    type="text" 
-                    placeholder="e.g. QmHash123..."
-                    value={kycHash}
-                    onChange={(e) => setKycHash(e.target.value)}
-                  />
+              {customerInfo?.isRegistered && (
+                <div className="data-row">
+                  <span className="data-label">Document Hash:</span>
+                  <span className="data-value" style={{wordBreak: 'break-all'}}>{customerInfo.dataHash}</span>
                 </div>
-                <button type="submit" className="action-btn animate-jiggle">
-                  Submit KYC Data
-                </button>
-              </form>
-            )}
-          </section>
+              )}
+              {customerInfo?.isVerified && (
+                <div className="data-row">
+                  <span className="data-label">Verified By:</span>
+                  <span className="data-value" style={{wordBreak: 'break-all'}}>{customerInfo.verifier}</span>
+                </div>
+              )}
 
-          {/* Institution Panel */}
-          <section className="glass-panel brutal-box animate-slide-up delay-2">
-            <h2 className="panel-title">INSTITUTION PORTAL</h2>
-            
-            {isBank ? (
-              <>
-                <div className="badge authorized-bank">AUTHORIZED BANK</div>
-                <form onSubmit={verifyCustomer}>
+              {!customerInfo?.isRegistered && (
+                <form onSubmit={registerCustomer} style={{marginTop: '2rem'}}>
                   <div className="form-group">
-                    <label>Customer Address to Verify</label>
+                    <label>KYC Document Hash (IPFS)</label>
                     <input 
                       type="text" 
-                      placeholder="0x..."
-                      value={customerAddress}
-                      onChange={(e) => setCustomerAddress(e.target.value)}
+                      placeholder="e.g. QmHash123..."
+                      value={kycHash}
+                      onChange={(e) => setKycHash(e.target.value)}
                     />
                   </div>
-                  <button type="submit" className="action-btn success animate-jiggle">
-                    Approve KYC
+                  <button type="submit" className="action-btn animate-jiggle">
+                    Submit KYC Data
                   </button>
                 </form>
-              </>
-            ) : (
-              <div style={{ textAlign: 'center', padding: '3rem 0' }}>
-                <span className="data-label" style={{display: 'block', marginBottom: '1rem', color: 'var(--primary)', fontSize: '4rem'}}>&#9888;</span>
-                <span className="data-label">Access Denied</span>
-                <p style={{ marginTop: '1rem', fontWeight: 500, fontSize: '1.2rem' }}>
-                  Your wallet is not authorized as a verified institution on this network.
-                </p>
-              </div>
-            )}
-          </section>
+              )}
+            </section>
+          )}
+
+          {/* Institution Panel - Hidden for Customers */}
+          {isBank && (
+            <section className="glass-panel brutal-box animate-slide-up delay-2">
+              <h2 className="panel-title">INSTITUTION PORTAL</h2>
+              <div className="badge authorized-bank" style={{marginBottom: '1rem'}}>AUTHORIZED BANK</div>
+              <form onSubmit={verifyCustomer}>
+                <div className="form-group">
+                  <label>Customer Address to Verify</label>
+                  <input 
+                    type="text" 
+                    placeholder="0x..."
+                    value={customerAddress}
+                    onChange={(e) => setCustomerAddress(e.target.value)}
+                  />
+                </div>
+                <button type="submit" className="action-btn success animate-jiggle">
+                  Approve KYC
+                </button>
+              </form>
+            </section>
+          )}
 
         </main>
       ) : (
